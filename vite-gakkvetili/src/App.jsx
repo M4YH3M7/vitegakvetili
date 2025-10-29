@@ -40,9 +40,9 @@ const [counter, setCounter] = useState(0); //state variable
           setCounter(counter - 1);
         }}
       />
-      <ResetButton
+      <CounterButtons
         title={"Reset"}
-        handleReset={() => {setCounter(0)}}
+        handleClick={() => {setCounter(0)}}
       />
 
     </>
