@@ -1,54 +1,52 @@
-import {useState} from "react";
+import { useState } from "react";
 import DiceBasic from "./components/DiceGamePlayers";
 
 function App() {
   const [player1, setPlayer1] = useState(1);
   const [player2, setPlayer2] = useState(1);
-  cconst [currentPlayer, setCcounterPlayer] = useSate(1);
+  const [currentPlayer, setCurrentPlayer] = useState(1);
 
-  let playerRandomNumber = 0;
+  const rollDice = () => {
+    const playerRandomNumber = Math.floor(Math.random() * 6) + 1;
 
-const rollDice = ()=>
-  {
-    playerRandomNumber = Math.floor(Math.random() * 6) + 1;
-
-    if(currentPlayer === 1){
-      setPlayer2(randomNumber);
-      setCcounterPlayer(2) 
-   } else 
-      {
-        setPlayer2(randomNumber); 
-        setCurrentPlayer(1);
-      }
-  
+    if (currentPlayer === 1) {
+      setPlayer1(playerRandomNumber);
+      setCurrentPlayer(2);
+    } else {
+      setPlayer2(playerRandomNumber);
+      setCurrentPlayer(1);
+    }
   };
 
+  const getWinner = () => {
+    if (player1 > player2) return "Player 1 wins!";
+    if (player2 > player1) return "Player 2 wins!";
+    return "It's a tie!";
+  };
 
   return (
-    <>
-      <div 
-        style={{
-          textAlign:"center",
-          padding: "20px",
-          margin: 0,
-        }}
-      >
-        <h1>Dice Game</h1>
+    <div style={{ textAlign: "center", padding: "20px", margin: 0 }}>
+      <h1>Dice Game</h1>
 
-        <DiceBasic
-        title={"player 1"  } dice={player1 - 1} handeClick={rollDice} 
-        isDisabled={currentPalyer === 2}/>
+      <DiceBasic
+        title={"Player 1"}
+        dice={player1 - 1}
+        handleClick={rollDice}
+        isDisabled={currentPlayer === 2}
+      />
 
-        <div>VS</div>
+      <div>VS</div>
 
-        <DiceBasic 
-        title={"player 2"}  dice={player2 - 1} handeClick={rollDice}
-        isDisabled={currentPlayer === 1} />
+      <DiceBasic
+        title={"Player 2"}
+        dice={player2 - 1}
+        handleClick={rollDice}
+        isDisabled={currentPlayer === 1}
+      />
 
-        </div>
-
-    </>
-  )
+      <h2>{getWinner()}</h2>
+    </div>
+  );
 }
 
-export default App
+export default App;
