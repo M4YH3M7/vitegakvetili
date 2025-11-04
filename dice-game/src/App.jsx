@@ -1,5 +1,6 @@
 import { useState } from "react";
 import DiceBasic from "./components/DiceGamePlayers";
+import WinnerBanner from "./components/WinnerBanner"; // ✅ ახალი იმპორტი
 
 function App() {
   const diceEmojis = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
@@ -22,9 +23,15 @@ function App() {
 
   const getWinner = () => {
     if (player1 === null || player2 === null) return "";
-    if (player1 > player2) return " Player 1 wins!";
-    if (player2 > player1) return " Player 2 wins!";
-    return " It's a tie!";
+    if (player1 > player2) return "🎉 Player 1 wins!";
+    if (player2 > player1) return "🏆 Player 2 wins!";
+    return "🤝 It's a tie!";
+  };
+
+  const resetGame = () => {
+    setPlayer1(null);
+    setPlayer2(null);
+    setCurrentPlayer(1);
   };
 
   return (
@@ -47,7 +54,8 @@ function App() {
         isDisabled={currentPlayer === 1}
       />
 
-      <h2>{getWinner()}</h2>
+      {/* ✅ ახალი კომპონენტი გამარჯვებულისთვის */}
+      <WinnerBanner winnerText={getWinner()} onReset={resetGame} />
     </div>
   );
 }
