@@ -1,10 +1,12 @@
 
 import React from "react";
 
-export default function WinnerBanner({ winnerText, onReset }) {
+export default function WinnerBanner({ winnerText, onReset }) 
+{
   if (!winnerText) return null; 
 
-  const bannerStyle = {
+  const bannerStyle = 
+  {
     backgroundColor: "#222",
     color: "white",
     padding: "20px",
@@ -14,7 +16,8 @@ export default function WinnerBanner({ winnerText, onReset }) {
     animation: "fadeIn 0.6s ease-in-out",
   };
 
-  const buttonStyle = {
+  const buttonStyle = 
+  {
     marginTop: "10px",
     padding: "10px 20px",
     fontSize: "16px",

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DiceBasic from "./components/DiceGamePlayers";
-import WinnerBanner from "./components/WinnerBanner"; // ✅ ახალი იმპორტი
+import WinnerBanner from "./components/WinnerBanner";
 
 function App() {
   const diceEmojis = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
@@ -10,22 +10,24 @@ function App() {
   const [currentPlayer, setCurrentPlayer] = useState(1);
 
   const rollDice = () => {
-    const playerRandomNumber = Math.floor(Math.random() * 6) + 1;
+    const randomNum = Math.floor(Math.random() * 6) + 1;
 
-    if (currentPlayer === 1) {
-      setPlayer1(playerRandomNumber);
+    if (currentPlayer === 1) 
+      {
+      setPlayer1(randomNum);
       setCurrentPlayer(2);
     } else {
-      setPlayer2(playerRandomNumber);
+      setPlayer2(randomNum);
       setCurrentPlayer(1);
     }
   };
 
-  const getWinner = () => {
+  const getWinner = () => 
+    {
     if (player1 === null || player2 === null) return "";
-    if (player1 > player2) return "🎉 Player 1 wins!";
-    if (player2 > player1) return "🏆 Player 2 wins!";
-    return "🤝 It's a tie!";
+    if (player1 > player2) return "🎉 Player 1 Wins!";
+    if (player2 > player1) return "🏆 Player 2 Wins!";
+    return "🤝 It's a Tie!";
   };
 
   const resetGame = () => {
@@ -35,7 +37,7 @@ function App() {
   };
 
   return (
-    <div style={{ textAlign: "center", padding: "20px", margin: 0 }}>
+    <div style={{ textAlign: "center", padding: "20px" }}>
       <h1>Dice Game 🎲</h1>
 
       <DiceBasic
@@ -54,10 +56,11 @@ function App() {
         isDisabled={currentPlayer === 1}
       />
 
-      {/* ✅ ახალი კომპონენტი გამარჯვებულისთვის */}
       <WinnerBanner winnerText={getWinner()} onReset={resetGame} />
     </div>
   );
 }
+
+
 
 export default App;
