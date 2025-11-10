@@ -18,14 +18,15 @@ export default function WinnerBanner({ winnerText, onReset, rounds= 3})
 
   const buttonStyle = 
   {
-    marginTop: "10px",
-    padding: "10px 20px",
-    fontSize: "16px",
-    // borderRadius: "10px",
-    backgroundColor: "#1100ffff",
-    color: "black",
-    cursor: "pointer",
-    border: "none",
+     marginTop: "20px",
+          padding: "12px 30px",
+          fontSize: "18px",
+          backgroundColor: "white",
+          color: winner === "tie" ? "#FFA500" : "#4CAF50",
+          border: "none",
+          borderRadius: "10px",
+          cursor: "pointer",
+          fontWeight: "bold",
   };
 
   return (

@@ -2,12 +2,27 @@ import { useState } from "react";
 import Player from "./components/DiceGamePlayers.jsx";
 import WinnerBanner from "./components/WinnerBanner.jsx";
 
+function GameOver()
+{
+  if(round > gameOverCount)
+    {
+      return true;
+    }
+    return false;
+}
+
+
 function App() 
 {
   const [player1, setPlayer1] = useState(null);
   const [player2, setPlayer2] = useState(null);
   const [round, setRound] = useState(1); 
   const [totalRounds, setTotalRounds] = useState(3);
+
+  const gameOverCount = 3;
+
+  const isGameOVer = round > gameOverCount;
+
   
 
   const current = () => 
@@ -49,6 +64,26 @@ const rollDice = () =>
     setRound(round + 1);
   };
 
+  if (isGameOVer) 
+    {
+      return(
+        <div>
+          <h1>Game Over</h1>
+          <p>The game has ended in a tie.</p>
+          <button onClick={playAgain}>Play Again</button>
+           style={{
+          textAlign: "center",
+          padding: "40px 0",
+          minHeight: "100vh",
+          background: "linear-gradient(135deg, #e3f2fd 0%, #c8e6c9 100%)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        </div>
+      )
+    }
   
 
 
@@ -87,7 +122,7 @@ return (
           title={"Player 1"}
           index={player1}
           handleClick={rollDice}
-          isDisabled={current() === 2}
+          isDisabled={current() === 1 || winner() !== null}
         />
 
         <div style={{ fontSize: "40px" }}>VS</div>
@@ -96,7 +131,7 @@ return (
           title={"Player 2"}
           index={player2}
           handleClick={rollDice}
-          isDisabled={current() === 1}
+          isDisabled={current() === 1 || winner() !== null}
         />
       </div>
       
