@@ -2,19 +2,22 @@ import { useState } from "react";
 import Player from "./components/DiceGamePlayers.jsx";
 import WinnerBanner from "./components/WinnerBanner.jsx";
 
-function App() {
+function App() 
+{
   const [player1, setPlayer1] = useState(null);
   const [player2, setPlayer2] = useState(null);
-  const [round, setRound] = useState(null); 
+  const [round, setRound] = useState(1); 
   const [totalRounds, setTotalRounds] = useState(3);
   
 
-  const current = () => {
+  const current = () => 
+    {
     if (player1 === null) return 1;
     return 2;
   }
 
-const rollDice = () => {
+const rollDice = () => 
+  {
     const randomNumber = Math.floor(Math.random() * 6) + 1;
 
     if (current() === 1) {
@@ -25,7 +28,8 @@ const rollDice = () => {
     }
   };
 
-  const winner = () => {
+  const winner = () => 
+    {
     if (player2 === null) {
       return null
     }
@@ -69,7 +73,8 @@ return (
       <h1>2Player Dice Game</h1>
 
       <div
-        style={{
+        style=
+        {{
           display: "flex",
           justifyContent: "center",
           gap: "20px",
