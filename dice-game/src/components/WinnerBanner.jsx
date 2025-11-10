@@ -1,7 +1,7 @@
 
 import React from "react";
 
-export default function WinnerBanner({ winnerText, onReset }) 
+export default function WinnerBanner({ winnerText, onReset, rounds= 3}) 
 {
   if (!winnerText) return null; 
 
@@ -10,7 +10,7 @@ export default function WinnerBanner({ winnerText, onReset })
     backgroundColor: "#222",
     color: "white",
     padding: "20px",
-    borderRadius: "15px",
+    // borderRadius: "15px",
     marginTop: "20px",
     fontSize: "24px",
     animation: "fadeIn 0.6s ease-in-out",
@@ -21,8 +21,8 @@ export default function WinnerBanner({ winnerText, onReset })
     marginTop: "10px",
     padding: "10px 20px",
     fontSize: "16px",
-    borderRadius: "10px",
-    backgroundColor: "#00bcd4",
+    // borderRadius: "10px",
+    backgroundColor: "#1100ffff",
     color: "black",
     cursor: "pointer",
     border: "none",
