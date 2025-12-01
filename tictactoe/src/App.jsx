@@ -1,21 +1,18 @@
 import Player from "./components/Player";
+import GameBoard from "./components/GameBoard";
 
-export default function App() {
-
-  const players = [
-    { name: "Player 1", symbol: "X" },
-    { name: "Player 2", symbol: "O" }
-  ];
-
+function App() {
   return (
     <main>
       <div id="game-container">
         <ol id="players">
-          {players.map((p) => (
-            <Player key={p.symbol} name={p.name} symbol={p.symbol} />
-          ))}
+          <Player name="Player 1" symbol="X" />
+          <Player name="Player 2" symbol="O" />
         </ol>
+        <GameBoard />
       </div>
     </main>
   );
 }
+
+export default App;
