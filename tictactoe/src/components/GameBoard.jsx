@@ -1,4 +1,3 @@
-// GameBoard.jsx
 import { useState } from "react";
 
 const initialGameBoard = [
@@ -7,21 +6,17 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-export default function GameBoard({ currentPlayer, onSquareSelect }) {
+export default function GameBoard({ currentPlayer, onSquareSeelct }) {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
   function handleSquareSelect(rowIndex, colIndex) {
-    // არ ირეგისტრირებს თუ უკვე სიმბოლო დევს
-    if (gameBoard[rowIndex][colIndex]) return;
-
     setGameBoard((prevValue) => {
-      const updatedBoard = prevValue.map((row) => [...row]);
+      const updatedBoard = [...prevValue.map((row) => [...row])];
       updatedBoard[rowIndex][colIndex] = currentPlayer;
       return updatedBoard;
     });
 
-    // მშობელს აჩვენე რომ მოიწვიე (შეგიძლია პარამებიც გაუგზავნო)
-    onSquareSelect && onSquareSelect(rowIndex, colIndex);
+    onSquareSeelct();
   }
 
   return (

@@ -1,11 +1,10 @@
-// Player.jsx
 import { useState } from "react";
 
 export default function Player({
-  currentPlayer, // შეიძლება არ გამოიყენო, მაგრამ ნახე App.jsx-ის მაგალითი
+  currentPlayer,
   initialName,
   symbol,
-  isActive, // წაუვლი App-დან: isActive = currentPlayer === symbol
+  isActive,
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [playerName, setPlayerName] = useState(initialName);
@@ -32,12 +31,11 @@ export default function Player({
   }
 
   return (
-    <li className={`player-item ${isActive ? "active" : ""}`}>
+    <li className={isActive ? "active" : "INA"}>
       <span className="player">
         {editablePlayerName}
         <span className="player-symbol">{symbol}</span>
         <button onClick={handleEditClick}>{isEditing ? "Save" : "Edit"}</button>
-        {isActive && <span className="current-badge"> ← Current</span>}
       </span>
     </li>
   );
