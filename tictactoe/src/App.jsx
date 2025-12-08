@@ -1,12 +1,32 @@
 import { useState } from "react";
 import Player from "./components/Player";
 import GameBoard from "./components/GameBoard";
+import Log from "./components/Log";
 
 function App() {
-  const [currentPlayer, setCurrentPlayer] = useState("X");
+  const [activePlayer, setActivePlayer] = useState("X");
+  const [gameTurns, setGameTurns] = useState([]);
+  
+
 
   function handleCurrentPlayerChange() {
-    setCurrentPlayer((prevValue) => (prevValue === "X" ? "O" : "X"));
+    
+    setActivePlayer((prevValue) => (prevValue === "X" ? "O" : "X"));
+
+    setGameTurns((prevGameTurns)=>{
+
+      let currentPlayer = "X";
+
+      if(prevGameTurns.length>0 && prevGameTurns[0]=== "X"){
+        currentPlayer = "O"
+      }
+
+      const updatedTurns = [
+        { symbol:"X",square:{row: rowIndex, col: colIndex}}, 
+        ...prevTurns,]
+      return updatedTurns;
+
+    });
   }
 
   return (
@@ -14,23 +34,23 @@ function App() {
       <div id="game-container">
         <ol id="players" className="highlight-player">
           <Player
-            currentPlayer={currentPlayer}
+            isActive={activePlayer === "X"}
             initialName="Player 1"
             symbol="X"
-            isActive={currentPlayer === "X"}
           />
           <Player
-            currentPlayer={currentPlayer}
+            isActive={activePlayer === "O"}
             initialName="Player 2"
             symbol="O"
-            isActive={currentPlayer === "O"}
           />
         </ol>
         <GameBoard
-          currentPlayer={currentPlayer}
           onSquareSeelct={handleCurrentPlayerChange}
+          activePlayer={activePlayer}
         />
       </div>
+
+      <Log moves ={moves}/>
     </main>
   );
 }
