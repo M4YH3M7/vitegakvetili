@@ -1,5 +1,11 @@
 export default function GameOver({ winner, onRestart }) 
-{
+{ let winnerText = "it is draw";
+  if (winner) {
+    winnerText = `${winner}won!`
+  }
+
+
+
   return (
     <div id="Games-over!">
       <h2>Game is Over!</h2>
