@@ -1,34 +1,48 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useEffect, useState } from "react";
 
 export default function PostDetails() {
   const { id } = useParams();
-  const [postData, setPostData] = useState(null);
+  const [post, setPost] = useState(null);
 
-  useEffect(() => {
-    const fetchPost = async () => {
+  useEffect(() => 
+    {
+    const gottenData = async () => {
       try {
-        const response = await fetch(
-          `https://jsonplaceholder.typicode.com/posts/${id}`
+        const responseURL = await fetch
+        (
+          "https://jsonplaceholder.typicode.com/posts?_limit=15"
         );
-        const data = await response.json();
-        setPostData(data);
-      } catch (err) {
-        console.log(err);
+
+        const data = await responseURL.json();
+
+        const foundPost = data.find((item) => item.id === Number(id));
+
+        if (!foundPost) {
+          setPost("notfound");
+        } else {
+          setPost(foundPost);
+        }
+      } catch (error) {
+        console.log(error);
       }
     };
 
-    fetchPost();
+    gottenData();
   }, [id]);
 
-  if (!postData) {
-    return <h2>Loading...</h2>;
+  if (post === null) {
+    return <div>Loading....</div>;
+  }
+
+  if (post === "notfound") {
+    return <div>Post not found</div>;
   }
 
   return (
     <div>
-      <h1>{postData.title}</h1>
-      <p>{postData.body}</p>
+      <h1>{post.title}</h1>
+      <p>{post.body}</p>
     </div>
   );
 }
