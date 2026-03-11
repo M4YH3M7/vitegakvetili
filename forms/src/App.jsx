@@ -2,93 +2,73 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
+
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
+  const [nameError, setNameError] = useState(false);
+  const [surnameError, setSurnameError] = useState(false);
+  const [passError, setPassError] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (name.length < 4) {
-      alert("Name must be at least 4 letters");
-      return;
-    }
-
-    if (surname.length < 4) {
-      alert("Surname must be at least 4 letters");
-      return;
-    }
-
-    if (pass.length < 6) {
-      alert("Password must be at least 6 characters");
-      return;
-    }
-
-    alert("Form submitted successfully");
-
-    setName("");
-    setSurname("");
-    setAge("");
-    setEmail("");
-    setPass("");
+    setNameError(name.length < 4);
+    setSurnameError(surname.length < 4);
+    setPassError(pass.length < 6);
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-4 bg-white p-6 rounded-md shadow-md w-[350px]"
-      >
-        <input
-          type="text"
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          placeholder="Enter your name"
-          className="border border-gray-300 rounded-md p-2 bg-gray-200"
-        />
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-60">
 
-        <input
-          type="text"
-          onChange={(e) => setSurname(e.target.value)}
-          value={surname}
-          placeholder="Enter your surname"
-          className="border border-gray-300 rounded-md p-2 bg-gray-200"
-        />
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="name"
+        className={`border p-2 ${nameError ? "border-red-500 bg-red-100" : "border-gray-300"}`}
+      />
 
-        <input
-          type="number"
-          onChange={(e) => setAge(e.target.value)}
-          value={age}
-          placeholder="Enter your age"
-          className="border border-gray-300 rounded-md p-2 bg-gray-200"
-        />
+      <input
+        type="text"
+        value={surname}
+        onChange={(e) => setSurname(e.target.value)}
+        placeholder="surname"
+        className={`border p-2 ${surnameError ? "border-red-500 bg-red-100" : "border-gray-300"}`}
+      />
 
-        <input
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          placeholder="Enter your email"
-          className="border border-gray-300 rounded-md p-2 bg-gray-200"
-        />
+      <input
+        type="number"
+        value={age}
+        onChange={(e) => setAge(e.target.value)}
+        placeholder="age"
+        className="border p-2 border-gray-300"
+      />
 
-        <input
-          type="password"
-          onChange={(e) => setPass(e.target.value)}
-          value={pass}
-          placeholder="Enter your password"
-          className="border border-gray-300 rounded-md p-2 bg-gray-200"
-        />
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="email"
+        className="border p-2 border-gray-300"
+      />
 
-        <button
-          type="submit"
-          className="bg-blue-500 text-white rounded-md p-2 hover:bg-blue-600"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
+      <input
+        type="password"
+        value={pass}
+        onChange={(e) => setPass(e.target.value)}
+        placeholder="password"
+        className={`border p-2 ${passError ? "border-red-500 bg-red-100" : "border-gray-300"}`}
+      />
+
+      <button className="bg-blue-500 text-white p-2">
+        submit
+      </button>
+
+    </form>
   );
 }
 
